@@ -20,7 +20,13 @@ const HomePage = (props: Props) => {
             setDomainType(data.type);
         } catch (error) {
             console.error("error", error);
-            error?.response?.status === 404 && setNotFound(true);
+
+            if (error instanceof Error && "response" in error) {
+                const { response } = error as { response: { status: number } };
+                if (response.status === 404) {
+                    setNotFound(true);
+                }
+            }
         }
     };
 

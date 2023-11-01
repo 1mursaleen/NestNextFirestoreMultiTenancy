@@ -38,7 +38,7 @@ export class SiteService {
 
   async createSite(site: Site, host: string): Promise<string> {
     try {
-      const url = `https://${site.subdomain}.${host}`;
+      const url = `http://${site.subdomain}.${host}`;
 
       const siteRef = await this.firestore
         .collection('sites')
